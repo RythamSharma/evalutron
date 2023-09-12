@@ -1,38 +1,136 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap');
+*{
+  padding: 0;
+  margin: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.nav-link{
+  padding-left: 30px !important;
+}
+.signup{
+  padding-left: 800px;
+  
+}
+.btn-outline-dark{
+  border: rgb(192, 192, 192) solid 1px !important;
+  border-radius: 300px;
+}
+#body{
+  /* margin-left: 20px; */
+  width: 100vw !important;
+}
+.body-btn{
+  background-color: #d461ae;
+  border: none;
+  border-radius: 15px;
+  color: #7b2241;
+  width: 310px;
+  font-weight: bolder;
+  font-size: 34px;
+  padding: 26px;
+  margin: 10px;
+}
+.card{
+  border-radius: 10%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+.card-text{
+  font-size: larger;
+  font-weight: bolder;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.body2-btn{
+  background-color: #ea96c2;
+  border: none;
+  border-radius: 18px;
+  color: #7b2241;
+  width: 245px;
+  font-weight: bolder;
+  font-size: 27px;
+  padding: 21px;
+  margin: 10px;
+}
+#body2{
+  width: 85vw !important;
+  float: right;
+}
+#body3{
+  width: 85vw !important;
+}
+.body3-btn{
+  background-color: #ea96c2;
+  border: none;
+  border-radius: 18px;
+  color: #7b2241;
+  width: 245px;
+  font-weight: bolder;
+  font-size: 27px;
+  padding: 25px;
+  margin: 10px;
+}
+#body4{
+  width: 85vw !important;
+  float: right;
+}
+.body4-btn{
+  background-color: #ea96c2;
+  border: none;
+  border-radius: 18px;
+  color: #7b2241;
+  width: 245px;
+  font-weight: bolder;
+  font-size: 27px;
+  padding: 25px;
+  margin: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+#body5{
+  width: 85vw !important;
+}
+.body5-btn{
+  background-color: #ea96c2;
+  border: none;
+  border-radius: 18px;
+  color: #7b2241;
+  width: 245px;
+  font-weight: bolder;
+  font-size: 27px;
+  padding: 25px;
+  margin: 10px;
+}
+
+body{
+  background-color: #f5ebfc;
+}
+
+.footer-home{
+  background-color: #2e2a73;
+}
+.foot{
+  margin-left: 40px;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.foot1{
+  color: white;
+  font-size: 25px;
+  list-style: none;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.foot2{
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+}
+.social{
+  margin-top: 40px;
+  width: 50px;
+}
+#stud{
+  width: 100vw;
+  height:100vh;
+}
+.heading{
+  font-family: 'Jost', sans-serif;
+}
+@media screen {
+  
 }
