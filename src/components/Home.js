@@ -82,7 +82,7 @@ export default function home() {
           Teacher
         </button>
         </Link>
-        <Link to="/loginstu">
+        <Link to="/studentchoice">
           <button
             style={{
               position: "absolute",

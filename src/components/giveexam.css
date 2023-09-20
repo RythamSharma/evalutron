@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+*{
+    font-family: 'Montserrat', sans-serif;
+}
+.answerfield {
+    /* Other styles... */
+    min-height: 300px; /* Set a minimum height for the input */
+    max-width: 100%; /* Allow the div to grow in width as content expands */
+    overflow-x: auto; /* Add horizontal scrollbar when content exceeds width */
+    white-space: pre-wrap; /* Allow content to wrap to the next line */
+    position: relative; /* Required for pseudo-element */
+  }
+  .answerfield:focus {
+    outline: 1px solid black; /* Add an outline with your desired color on focus */
+  }
+  
+  .answerfield::after {
+    content: ''; /* Empty pseudo-element */
+    display: block;
+    visibility: hidden;
+    height: 0; /* Initial height is 0 */
+    clear: both;
+  }
+  

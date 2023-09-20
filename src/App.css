@@ -4,6 +4,15 @@
   margin: 0;
 }
 
+/* .home-body-container{
+  font-family: 'jost';
+  background-image: url('./components/pictures/Rectangle.png');
+  width: auto;
+  margin-left: 3%;
+  margin-right: 3%;
+  height:90vh;
+} */
+
 .nav-link{
   padding-left: 30px !important;
 }

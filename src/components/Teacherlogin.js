@@ -1,7 +1,36 @@
 import React from "react";
 import stud from "./studlogin.png";
 import bg01 from "./bg01.png";
-export default function studentlogin() {
+import { useState } from "react";
+export default function Teacherlogin() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const userData = {
+      username: username,
+      password: password,
+    };
+    try {
+      const response = await fetch('http://localhost:3001/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+      const data = await response.json();
+      console.log(data);
+      if (!data.message) {
+        console.log('Authentication successful');
+        
+      } else {
+        console.error('Authentication failed');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
   return (
     <div className="containewr">
       <img src={stud} id="stud" alt="..." />
@@ -40,20 +69,24 @@ export default function studentlogin() {
         id="stud"
         alt="..."
       />
-      <form className="d-flex" role="search" >
+      <form className="d-flex" onSubmit={handleSubmit} role="search" >
         <input
           style={{width:'350px', position:'absolute',top:'320px',left:'1000px',borderRadius:'15px'}}
           className="form-control me-2"
           type="search"
           placeholder="Enter Your ID"
           aria-label="Search"
+          onChange={(e)=>{setUsername(e.target.value)}}
+          value={username}
         />
          <input
           style={{width:'350px', position:'absolute',top:'370px',left:'1000px',borderRadius:'15px'}}
           className="form-control me-2"
-          type="search"
+          type="password"
           placeholder="Enter Your Password"
           aria-label="Search"
+          onChange={(e)=>{setPassword(e.target.value)}}
+          value={password}
         />
         <button className="btn btn-outline-secondary" style={{width:'350px', position:'absolute',top:'450px',left:'1000px'}}
         type="submit">
