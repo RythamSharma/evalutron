@@ -91,7 +91,7 @@ function Giveexam(props) {
       console.log("info = ", userInfo);
 
       axios
-        .post("https://examai.onrender.com/submit-answer", examData)
+        .post("http://localhost:3001/submit-answer", examData)
         .then((response) => {
           console.log(response.data);
           // Handle success, e.g., show a success message
@@ -107,7 +107,7 @@ function Giveexam(props) {
   return (
     <>
     <div>
-      <div className="nav bg-blue-950 text-white flex justify-between items-center">
+      <div className="nav bg-blue-950 text-white flex justify-between items-center sticky top-0 z-10">
         <ul className="flex">
           <li className="p-4 cursor-pointer font-bold text-xl ">
             Discrete Mathematics Exam
@@ -177,7 +177,7 @@ function Giveexam(props) {
         )}
       </>
     </div>
-     <footer className="bg-slate-600 text-white p-4 text-center">
+     <footer className="bg-blue-950 text-white p-4 text-center">
      <div className="mb-4">
        <strong>Helpline:</strong> +91-XXXXXXXXXX
      </div>
