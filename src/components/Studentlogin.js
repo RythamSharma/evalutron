@@ -35,7 +35,7 @@ export default function Studentlogin(props) {
       console.log(userInfo)
       if (!data.message) {
         if (action === "view") {
-          navigate('/viewresult');
+          navigate('/viewresultstudent');
         }
         else if (action === "exam") {
           navigate("/giveexam");

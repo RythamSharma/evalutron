@@ -113,6 +113,7 @@ export default function home() {
       </div>
       <div>
         <img id="body2" src={body2} alt="" />
+        <Link to='/loginstu' >
         <button
           style={{
             position: "absolute",
@@ -123,9 +124,11 @@ export default function home() {
         >
           Get Started
         </button>
+        </Link>
       </div>
       <div>
         <img id="body3" src={body3} alt="" />
+        <Link to={'/logintea'} >
         <button
           style={{
             position: "absolute",
@@ -136,9 +139,11 @@ export default function home() {
         >
           Get Started
         </button>
+        </Link>
       </div>
       <div>
         <img id="body4" src={body4} alt="" />
+        <Link to='/loginstu' >
         <button
           style={{
             position: "absolute",
@@ -149,9 +154,11 @@ export default function home() {
         >
           Get Started
         </button>
+        </Link>
       </div>
       <div>
         <img id="body5" src={body5} alt="" />
+        <Link to='/logintea' >
         <button
           style={{
             position: "absolute",
@@ -162,6 +169,7 @@ export default function home() {
         >
           Get Started
         </button>
+        </Link>
       </div>
       <Footer />
       <div style={{ backgroundColor: "#2e2a73", marginTop: "1px" }}>

@@ -54,7 +54,7 @@ export default function Createexam() {
     const jsonData = JSON.stringify(examData, null, 2);
     // Send the data to the 'insertquestion' route
     axios
-      .post("https://examai.onrender.com/insertquestion", jsonData, {
+      .post("http://localhost:3001/insertquestion", jsonData, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -74,13 +74,14 @@ export default function Createexam() {
   const generateInputs = () => {
     return Array.from({ length: numQuestions }, (_, index) => (
 <div key={index} className="flex flex-col m-6">
-    <label htmlFor={`q${index}`} >Question{index +1}</label>
-  <input
-    className="questionfield w-full h-96 mx-2 my-2 px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500 resize-none"
-    type="text"
-    placeholder={`Question ${index + 1}`}
+  <label htmlFor={`q${index}`}>Question {index + 1}</label>
+  <textarea
+    className="questionfield w-full h-96 mx-2 my-2 px-2 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500 resize-none"
+    id={`q${index}`}
+    placeholder={`Enter Question ${index + 1}`}
     onChange={(e) => handleQuestionChange(index, e)}
-  />
+    rows="4" // You can adjust the number of rows as needed
+  ></textarea>
   <input
     className="w-96 h-12 mx-2 my-2 px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
     type="number"
@@ -88,8 +89,6 @@ export default function Createexam() {
     onChange={(e) => handleMarksChange(index, e)}
   />
 </div>
-
-
       
     ));
   };

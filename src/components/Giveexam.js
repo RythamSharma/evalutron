@@ -47,7 +47,7 @@ function Giveexam(props) {
         setCurrentDate(date);
         const queryParams = `?subjectCode=${subjectCode}&date=${date}`;
         axios
-          .get(`https://examai.onrender.com/getSubject/${queryParams}`)
+          .get(`http://localhost:3001/getSubject/${queryParams}`)
           .then((response) => {
             setQuestions(response.data.questions);
 

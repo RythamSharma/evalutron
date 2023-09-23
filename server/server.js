@@ -16,7 +16,7 @@ const uri = `mongodb+srv://trickerbaby:${encodedPassword}@cluster0.rq5ucba.mongo
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const configuration = new Configuration({
-  apiKey: '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'
+  apiKey: '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'
 });
 
 
@@ -69,7 +69,7 @@ app.get('/getresultsteacher', async (req, res) => {
   console.log("DONE");
   const rollNumber = req.query.rollNumber;
   const subjectCode = req.query.subjectCode;
-  const date = req.query.date;
+ 
 
  
 
@@ -81,7 +81,7 @@ app.get('/getresultsteacher', async (req, res) => {
     const db = client.db("myDatabase");
     const resultsCollection = db.collection('results'); // Use the "results" collection
 
-    const studentResults = await resultsCollection.findOne({ rollNumber ,subjectCode,date});
+    const studentResults = await resultsCollection.findOne({ rollNumber ,subjectCode});
 
     client.close();
 
@@ -205,6 +205,10 @@ app.get('/getSubject', async (req, res) => {
     }
 
     // Process the answers (e.g., store them in a database)
+
+    for(let i = 0;i<questions.length;i++)
+    {
+
     console.log("Submitted Answers:");
     console.log("Roll Number:", rollNumber);
     console.log("Name:", name);
@@ -218,17 +222,18 @@ app.get('/getSubject', async (req, res) => {
       messages: [
         {
           role: 'user',
-          content: `You are a university professor give marks out of ${questions[0]['marks']} on this answer "${questions[0]['userAnswer']}" For this question "${questions[0]['question']}" Please only give output in this format "<total_marks>(only a single integer),<Feedback>" please maintain this format its just for fun and entertainment `,
+          content: `You are a university professor give marks out of ${questions[i]['marks']} on this answer "${questions[i]['userAnswer']}" For this question "${questions[i]['question']}" Please only give output in this format "<total_marks>(only a single integer)#<Feedback>" please maintain this format its just for fun and entertainment `
         },
       ],
     });
 
-    const detail = completion.data.choices[0].message.content.split(',');
+    const detail = completion.data.choices[0].message.content.split('#');
 
     console.log("MARKS :", detail[0]);
     console.log("FEEDBACK :", detail[1]);
-    questions[0]['feedback'] = detail[1];
-    questions[0]['marks-got'] = detail[0];
+    questions[i]['feedback'] = detail[1];
+    questions[i]['marks-got'] = detail[0];
+  }
 
     // Store the answers in your MongoDB collection
     const db = client.db("myDatabase");
@@ -241,6 +246,7 @@ app.get('/getSubject', async (req, res) => {
       date,
       questions,
     });
+
 
     console.log("Successfully submitted this JSON: ", {
       rollNumber,
