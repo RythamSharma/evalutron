@@ -70,7 +70,7 @@ export default function home() {
       </div>
       <div className="body-container" style={{ position: "relative" }}>
         <img id="body" src={body} alt="" />
-        <Link to='/logintea'>
+        <Link to='/teacherchoice'>
         <button
           style={{
             position: "absolute",
@@ -82,7 +82,7 @@ export default function home() {
           Teacher
         </button>
         </Link>
-        <Link to="/loginstu">
+        <Link to="/studentchoice">
           <button
             style={{
               position: "absolute",

@@ -161,6 +161,37 @@ app.get('/getSubject', async (req, res) => {
   });
 
 
+
+  app.post("/loginT", async (req, res) => {
+    console.log("enterd in teacher login");
+    const { username, password } = req.body;
+    console.log(username,password);
+    
+    try {
+      // Assuming you have a MongoDB collection named 'subjects'
+      const db = client.db("myDatabase");
+      const teacherColl = db.collection("teachers");
+      
+      // Find the subject with the specified subjectCode
+      const teacher = await teacherColl.findOne({username,password});
+
+      console.log(teacher);
+  
+      if (teacher) {
+        res.json(teacher);
+      } else {
+        res.json({ message: "Not found" });
+      }
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Server error" });
+    }
+    // Check if the provided credentials match the valid credentials
+    
+  });
+
+
+
   
  // Sample endpoint to handle answer submission
  app.post("/submit-answer", async (req, res) => {

@@ -2,7 +2,13 @@ import React from "react";
 import stud from "./studlogin.png";
 import bg01 from "./bg01.png";
 import { useState } from "react";
+import {useNavigate} from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 export default function Teacherlogin() {
+  const navigate= useNavigate();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const action = searchParams.get("action");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   async function handleSubmit(e) {
@@ -12,24 +18,34 @@ export default function Teacherlogin() {
       password: password,
     };
     try {
-      const response = await fetch('http://localhost:3001/login', {
+      const response = await fetch('http://localhost:3001/loginT', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(userData),
       });
-      const data = await response.json();
-      console.log(data);
-      if (!data.message) {
-        console.log('Authentication successful');
-        
+      if (response.ok) {
+        const data = await response.json();
+        if (action === "view") {
+          navigate('/viewresult');
+        }
+        else if (action === "exam") {
+          navigate("/createexam");
+        }
+        console.log(data);
+        if (!data.message) {
+          console.log('Authentication successful');
+        } else {
+          console.error('Authentication failed');
+        }
       } else {
-        console.error('Authentication failed');
+        console.error('Server returned an error:', response.status);
       }
     } catch (error) {
       console.error('Error:', error);
     }
+    
   }
   return (
     <div className="containewr">

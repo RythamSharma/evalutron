@@ -3,7 +3,11 @@ import stud from "./studlogin.png";
 import bg01 from "./bg01.png";
 import { useState } from "react";
 import {useNavigate} from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 export default function Studentlogin(props) {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const action = searchParams.get("action");
   const {setUserInfo,setRollNumber,userInfo,rollNumber}=props; 
   const [roll, setRoll] = useState('');
   const [pass, setPass] = useState('');
@@ -30,7 +34,12 @@ export default function Studentlogin(props) {
       console.log(rollNumber)
       console.log(userInfo)
       if (!data.message) {
-        navigate("/giveexam");
+        if (action === "view") {
+          navigate('/viewresult');
+        }
+        else if (action === "exam") {
+          navigate("/giveexam");
+        }
         console.log('Authentication successful');
         
       } else {

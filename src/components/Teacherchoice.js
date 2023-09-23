@@ -27,7 +27,7 @@ export default function Studentchoice() {
           fontSize: "70px",
         }}
       >
-        STUDENT
+        TEACHER
       </h1>
       <img
         src={bg01}
@@ -41,7 +41,7 @@ export default function Studentchoice() {
         id="stud"
         alt="..."
       />
-      <Link to="/loginstu?action=view">
+      <Link to="/logintea?action=view">
         <button
           className="btn btn-outline-secondary"
           style={{
@@ -56,7 +56,7 @@ export default function Studentchoice() {
         </button>
       </Link>
 
-      <Link to="/loginstu?action=exam">
+      <Link to="/logintea?action=exam">
         <button
           className="btn btn-outline-secondary"
           style={{
@@ -67,7 +67,7 @@ export default function Studentchoice() {
           }}
           type="submit"
         >
-          Give Exam
+         Create Exam
         </button>
       </Link>
     </div>
