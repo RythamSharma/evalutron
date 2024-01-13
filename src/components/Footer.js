@@ -2,10 +2,10 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <footer style={{ backgroundColor: "#2e2a73" }}>
-      <div className="container">
+    <footer className="bg-gradient-to-br from-violet-900 to-slate-50" style={{ backgroundColor: "#2e2a73" }}>
+      <div className="  bg-gray-100 rounded-md bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-20  container">
         <div className="row">
-          <div className="col" style={{ padding: "100px" }}>
+          <div className="col" style={{ padding: "80px" }}>
             <h4 className="foot">PLATFORM</h4>
             <ul className="foot1">
               <li>
@@ -30,7 +30,7 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-          <div className="col" style={{ padding: "100px" }}>
+          <div className="col" style={{ padding: "80px" }}>
             <h4 className="foot">HELP</h4>
             <ul className="foot1">
               <li>
@@ -50,7 +50,7 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-          <div className="col" style={{ padding: "100px" }}>
+          <div className="col" style={{ padding: "80px" }}>
             <h4 className="foot">Contacts</h4>
             <ul className="foot1">
               <li>

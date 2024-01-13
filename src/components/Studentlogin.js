@@ -1,118 +1,108 @@
 import React from "react";
-import stud from "./studlogin.png";
-import bg01 from "./bg01.png";
 import { useState } from "react";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import img from "./pictures/practicer.png";
 export default function Studentlogin(props) {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const action = searchParams.get("action");
-  const {setUserInfo,setRollNumber,userInfo,rollNumber}=props; 
-  const [roll, setRoll] = useState('');
-  const [pass, setPass] = useState('');
+  const { setUserInfo, setRollNumber, userInfo, rollNumber } = props;
+  const [roll, setRoll] = useState("");
+  const [pass, setPass] = useState("");
   let navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setRollNumber(roll)
+    setRollNumber(roll);
     const userData = {
       username: roll,
       password: pass,
     };
     try {
-      const response = await fetch('http://localhost:3001/login', {
-        method: 'POST',
+      const response = await fetch("http://localhost:3001/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(userData),
       });
       const data = await response.json();
       setUserInfo(data);
       // console.log(data);
-      console.log(rollNumber)
-      console.log(userInfo)
+      console.log(rollNumber);
+      console.log(userInfo);
       if (!data.message) {
         if (action === "view") {
-          navigate('/viewresultstudent');
-        }
-        else if (action === "exam") {
+          navigate("/viewresultstudent");
+        } else if (action === "exam") {
           navigate("/giveexam");
         }
-        console.log('Authentication successful');
-        
+        console.log("Authentication successful");
       } else {
-        console.error('Authentication failed');
+        console.error("Authentication failed");
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   }
   return (
-    <div className="containewr">
-      <img src={stud} id="stud" alt="..." />
-      <h1
-        className="heading"
-        style={{
-          position: "absolute",
-          top: "30px",
-          left: "90px",
-          fontSize: "70px",
-        }}
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-tl overflow-hidden  from-amber-100 via-rose-300 to-fuchsia-500">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col items-center bg-gray-900 rounded-3xl bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-20 p-20 w-full  md:w-[50vw]"
       >
-        EVALUTRON
-      </h1>
-      <h1
-        className="heading"
-        style={{
-          position: "absolute",
-          top: "30px",
-          left: "567px",
-          color: "#b19ea1",
-          fontSize: "70px",
-        }}
-      >
-        STUDENT
-      </h1>
-      <img
-        src={bg01}
-        style={{
-          position: "absolute",
-          top: "156px",
-          left: "220px",
-          width: "490px",
-          height: "auto",
-        }}
-        id="stud"
-        alt="..."
-      />
-      <form  onSubmit={handleSubmit} className="d-flex" role="search" >
-        <input
-          style={{width:'350px', position:'absolute',top:'320px',left:'1000px',borderRadius:'15px'}}
-          className="form-control me-2"
-          type="search"
-          placeholder="Enter Your Roll no"
-          aria-label="Search"
-          onChange={(e)=>{setRoll(e.target.value)}}
-          value={roll}
-        />
-         <input
-          style={{width:'350px', position:'absolute',top:'370px',left:'1000px',borderRadius:'15px'}}
-          className="form-control me-2"
-          type="password"
-          placeholder="Enter Your Password"
-          aria-label="Search"
-          onChange={(e)=>{setPass(e.target.value)}}
-          value={pass}
-        />
-        <button className="btn btn-outline-secondary" style={{width:'350px', position:'absolute',top:'450px',left:'1000px'}}
-        type="submit">
-          Login
-        </button>
-        <button className="btn btn-link" style={{width:'350px', position:'absolute',top:'500px',left:'1121px'}}>
-          Create Account?
-        </button>
+        <h1
+          className="  mb-[-20px]  md:mb-16 font-extrabold text-black heading "
+          style={{ fontSize: "60px" }}
+        >
+          EVALUTRON
+        </h1>
+        <h1
+          className=" mb-[-6px] mt-11 md:hidden font-extralight text-black  "
+          style={{ fontSize: "20px" }}
+        >
+          Enter Credentials
+        </h1>
+        <div className="flex flex-row  ">
+          <div>
+            <img src={img} className="w-96" alt="" />
+          </div>
+          <div className="flex flex-col mt-11">
+            <input
+              style={{
+                width: "350px",
+                borderRadius: "15px",
+                marginTop: "10px",
+              }}
+              className="form-control me-2"
+              type="search"
+              placeholder="Enter Your Roll no"
+              onChange={(e) => setRoll(e.target.value)}
+              value={roll}
+            />
+
+            <input
+              style={{
+                width: "350px",
+                borderRadius: "15px",
+                marginTop: "10px",
+              }}
+              className="form-control me-2"
+              type="password"
+              placeholder="Enter Your Password"
+              onChange={(e) => setPass(e.target.value)}
+              value={pass}
+            />
+            <button
+              className="btn btn-outline-secondary text-white border-white "
+              style={{ width: "348px", marginTop: "10px" }}
+              type="submit"
+            >
+              Login
+            </button>
+          </div>
+        </div>
       </form>
     </div>
   );

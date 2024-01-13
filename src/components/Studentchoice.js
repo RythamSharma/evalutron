@@ -1,75 +1,52 @@
 import React from "react";
-import stud from "./studlogin.png";
-import bg01 from "./bg01.png";
+import bg01 from "./pictures/bg01.png";
 import { Link } from "react-router-dom";
 export default function Studentchoice() {
   return (
-    <div className="containewr">
-      <img src={stud} id="stud" alt="..." />
+    <div className=" md:mt-[-23px] bg-gradient-to-br from-amber-100 via-rose-300 to-fuchsia-500 h-[100vh] md:h-[90vh] w-[100vw] ">
       <h1
-        className="heading"
+        className="heading hidden md:block "
         style={{
-          position: "absolute",
-          top: "30px",
-          left: "90px",
           fontSize: "70px",
         }}
       >
         EVALUTRON
       </h1>
       <h1
-        className="heading"
+        className="p-1  "
         style={{
-          position: "absolute",
-          top: "30px",
-          left: "567px",
-          color: "#b19ea1",
           fontSize: "70px",
         }}
       >
         STUDENT
       </h1>
-      <img
-        src={bg01}
-        style={{
-          position: "absolute",
-          top: "156px",
-          left: "220px",
-          width: "490px",
-          height: "auto",
-        }}
-        id="stud"
-        alt="..."
-      />
-      <Link to="/loginstu?action=view">
-        <button
-          className="btn btn-outline-secondary"
-          style={{
-            width: "350px",
-            position: "absolute",
-            top: "320px",
-            left: "1000px",
-          }}
-          type="submit"
-        >
-          View Result
-        </button>
-      </Link>
-
-      <Link to="/loginstu?action=exam">
-        <button
-          className="btn btn-outline-secondary"
-          style={{
-            width: "350px",
-            position: "absolute",
-            top: "370px",
-            left: "1000px",
-          }}
-          type="submit"
-        >
-          Give Exam
-        </button>
-      </Link>
+      <div className=" bg-gray-100 rounded-[70px] bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-30  h-[76vh] items-center justify-center flex">
+        <img src={bg01} className="hidden md:block w-96" alt="" />
+        <div className="flex flex-col">
+          <Link to="/loginstu?action=exam">
+            <button
+              className="btn btn-outline-secondary m-2"
+              style={{
+                width: "350px",
+              }}
+              type="submit"
+            >
+              Give Exam
+            </button>
+          </Link>
+          <Link to="/loginstu?action=view">
+            <button
+              className="btn btn-outline-secondary m-2"
+              style={{
+                width: "350px",
+              }}
+              type="submit"
+            >
+              View Result
+            </button>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

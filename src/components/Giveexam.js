@@ -5,13 +5,41 @@ import "./tailwind.css";
 import { useEffect } from "react";
 
 function Giveexam(props) {
+  const [tabActive, setTabActive] = useState(true);
   const { userInfo, rollNumber } = props;
   const [subjectCode, setSubjectCode] = useState("");
   const [questions, setQuestions] = useState([]);
+  const [submitted, setSubmitted]= useState(false);
   const [currentDate, setCurrentDate] = useState("");
+  const [comment,setcomment] = useState("");
   const [userAnswers, setUserAnswers] = useState([]);
   const [success, setsuccess] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(3 * 60 * 60); 
+  const [timeLeft, setTimeLeft] = useState(3 * 60 * 60);
+
+
+
+  const handleVisibilityChange = () => {
+    if (document.hidden) {
+      // Tab is switched to a different tab or window
+      setTabActive(false);
+      
+      // Automatically submit answers when the tab becomes inactive
+      handleSubmission();
+    } else {
+      // Tab is back to being active
+      setTabActive(true);
+    }
+  };
+
+  useEffect(() => {
+    // Add an event listener for visibility change
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      // Remove the event listener when the component unmounts
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -50,6 +78,7 @@ function Giveexam(props) {
           .get(`http://localhost:3001/getSubject/${queryParams}`)
           .then((response) => {
             setQuestions(response.data.questions);
+            setcomment(response.data.comment);
 
             console.log("user info here ", response.data);
             setUserAnswers(Array(response.data.questions.length).fill(""));
@@ -74,37 +103,43 @@ function Giveexam(props) {
   };
 
   const handleSubmission = () => {
-    setsuccess(true);
-    if (userInfo) {
-      const examData = {
-        subjectCode: subjectCode,
-        date: currentDate,
-        rollNumber: rollNumber, // Include user information
-        name: userInfo.name, // Include user information
-        semester: userInfo.semester, // Include user information
-        questions: questions.map((question, index) => ({
-          question: question.question,
-          marks: question.marks,
-          userAnswer: userAnswers[index],
-        })),
-      };
-      console.log("info = ", userInfo);
+    console.log("comment in handle submission is ",comment);
+    if (!success) { // Check if submission is allowed (success is false)
+      setsuccess(true);
+      if (userInfo) {
+        const examData = {
+          subjectCode: subjectCode,
+          date: currentDate,
+          rollNumber: rollNumber, // Include user information
+          name: userInfo.name, // Include user information
+          semester: userInfo.semester, // Include user information
+          comment: comment,
+          questions: questions.map((question, index) => ({
+            question: question.question,
+            marks: question.marks,
+            userAnswer: userAnswers[index],
+          })),
+        };
+        console.log("info = ", userInfo);
 
-      axios
-        .post("http://localhost:3001/submit-answer", examData)
-        .then((response) => {
-          console.log(response.data);
-          // Handle success, e.g., show a success message
-        })
-        .catch((error) => {
-          console.error("Error submitting answers:", error);
-          // Handle error, e.g., show an error message
-        });
-    } else {
-      console.error("User information not available.");
+        axios
+          .post("http://localhost:3001/submit-answer", examData)
+          .then((response) => {
+            console.log(response.data);
+            setSubmitted(true);
+            // Handle success, e.g., show a success message
+          })
+          .catch((error) => {
+            console.error("Error submitting answers:", error);
+            // Handle error, e.g., show an error message
+          });
+      } else {
+        console.error("User information not available.");
+      }
     }
   };
-  return (
+  
+    return (
     <>
     <div>
       <div className="nav bg-blue-950 text-white flex justify-between items-center sticky top-0 z-10">
@@ -158,11 +193,12 @@ function Giveexam(props) {
           </ul>
 
           <button
-            className=" ml-6 bg-blue-950 hover:bg-blue-700 text-white py-2 px-2 rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out"
-            onClick={handleSubmission}
-          >
-            Submit Answers
-          </button>
+        className=" ml-6 bg-blue-950 hover:bg-blue-700 text-white py-2 px-2 rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out"
+        onClick={handleSubmission}
+        disabled={submitted} // Disable if already submitted
+      >
+        {submitted ? "Answers Submitted" : "Submit Answers"}
+      </button>
         </div>
       ) : !success ? (
         <p className="font-bold text-center m-64 text-2xl" >No questions found for the entered subject code.</p>

@@ -1,102 +1,138 @@
 import React from "react";
-import logo from "./logo.png";
-import body from "./body.png";
+import logo from "./pictures/logo.png";
 import Card from "./Card";
-import practice from "./practicer.png";
-import learning from "./learning.png";
-import mock from "./mock.png";
-import result from "./result.png";
-import body2 from "./body2.png";
-import body3 from "./body3.png";
-import body4 from "./body4.png";
-import body5 from "./body5.png";
+import practice from "./pictures/practicer.png";
+import learning from "./pictures/learning.png"
+import mock from "./pictures/mock.png";
+import result from "./pictures/result.png";
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
 
-export default function home() {
+export default function Home() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
   return (
     <>
-      <div>
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
-          <div className="container-fluid">
-            <a className="navbar-brand" href="/">
-              <img src={logo} alt="logo" style={{ width: "130px" }} />
-            </a>
+      <nav className="bg-white dark:bg-white fixed w-full z-20 top-0 left-0 border-b border-gray-200">
+        <div className="max-w-full flex flex-wrap items-center justify-evenly md:justify-between mx-auto p-0">
+          <a href="https://flowbite.com/" className="flex items-center">
+            <img src={logo} className="w-32 mr-2" alt="Flowbite Logo" />
+            <span className="self-center text-2xl col-p md:text-3xl font-extralight whitespace-nowrap dark:text-[#2e2a73]">
+              Evalutron
+            </span>
+          </a>
+          <div className="flex md:order-2">
             <button
-              className="navbar-toggler"
+              data-collapse-toggle="navbar-sticky"
               type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
+              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-md md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-300 dark:hover:bg-[#2e2a73] dark:focus:ring-gray-100"
+              aria-controls="navbar-sticky"
+              aria-expanded={isMenuOpen ? "true" : "false"}
+              onClick={toggleMenu}
             >
-              <span className="navbar-toggler-icon"></span>
+              <span className="sr-only">Open main menu</span>
+              <svg
+                className={`w-5 h-5 ${isMenuOpen ? "transform rotate-90" : ""}`}
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 17 14"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M1 1h15M1 7h15M1 13h15"
+                />
+              </svg>
             </button>
-            <div className="collaspse navbar-collaspse" id="navbarNav">
-              <ul className="navbar-nav">
-                <li className="nav-item" >
-                  <a className="nav-link active" aria-current="page" href="/">
-                    Home
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="/">
-                    Learn
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="/">
-                    Overview
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="/">
-                    About Us
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="/">
-                    Help
-                  </a>
-                </li>
-                <li className="signup">
-                  <button className="btn btn-outline-dark"> Sign Up</button>
-                </li>
-              </ul>
-            </div>
           </div>
-        </nav>
-      </div>
-      <div className="body-container" style={{ position: "relative" }}>
-        <img id="body" src={body} alt="" />
-        <Link to='/teacherchoice'>
-        <button
-          style={{
-            position: "absolute",
-            top: "41.276041666666664vw",
-            left: "6.4453125vw",
-          }}
-          className="body-btn"
-        >
-          Teacher
-        </button>
-        </Link>
-        <Link to="/studentchoice">
-          <button
-            style={{
-              position: "absolute",
-              top: "41.276041666666664vw",
-              left: "29.036458333333332vw",
-            }}
-            className="body-btn"
+          <div
+            className={`items-center justify-between w-full ${
+              isMenuOpen ? "block" : "hidden"
+            } md:flex md:w-auto md:order-1`}
+            id="navbar-sticky"
           >
-            Student
-          </button>
-        </Link>
+            <ul className="flex flex-col p-4 md:p-0 mt-2 font-medium  rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-white md:dark:bg-white dark:border-gray-700">
+              <li>
+                <a
+                  href="/"
+                  className={` block py-2 pl-3 pr-4 text-black col-p text-xl rounded md:bg-transparent  md:p-0 ${
+                    location.pathname === "/" ? "md:dark:text-[#2e2a73]" : ""
+                  } `}
+                  aria-current="page"
+                  onClick={closeMenu}
+                >
+                  Home
+                </a>
+              </li>
+              <Link to="/About">
+                <li
+                  onClick={closeMenu}
+                  className={`block py-2 pl-3 pr-4 text-black rounded col-p text-xl hover:bg-[#2e2a73] md:hover:bg-transparent  md:p-0 md:dark:hover:text-[#2e2a73] dark:text-black dark:hover:bg-[#2e2a73] dark:hover:text-white md:dark:hover:bg-transparent ${
+                    location.pathname === "/About"
+                      ? "md:dark:text-[#2e2a73]"
+                      : ""
+                  } dark:border-gray-700 transition-colors duration-200 ease-in-out `}
+                >
+                  About
+                </li>
+              </Link>
+              <Link to="/Shop">
+                <li
+                  onClick={closeMenu}
+                  className={`block py-2 pl-3 pr-4 text-black rounded col-p text-xl ${
+                    location.pathname === "/Shop"
+                      ? "md:dark:text-[#2e2a73]"
+                      : ""
+                  } hover:bg-[#2e2a73] md:hover:bg-transparent md:p-0 md:dark:hover:text-[#2e2a73] dark:text-black dark:hover:bg-[#2e2a73] dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition-colors duration-200 ease-in-out `}
+                >
+                  Help
+                </li>
+              </Link>
+              <Link to="/Contact">
+                <li
+                  onClick={closeMenu}
+                  className={`block py-2 pl-3 pr-4 text-black rounded col-p text-xl hover:bg-[#2e2a73] md:hover:bg-transparent md:p-0 md:dark:hover:text-[#2e2a73] dark:text-black dark:hover:bg-[#2e2a73] dark:hover:text-white md:dark:hover:bg-transparent ${
+                    location.pathname === "/Contact"
+                      ? "md:dark:text-[#2e2a73]"
+                      : ""
+                  } dark:border-gray-700 transition-colors duration-200 ease-in-out `}
+                >
+                  Contact
+                </li>
+              </Link>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div className="body-container mt-[90px] md:mt-[98px]  bg-gradient-to-br from-rose-200 to-fuchsia-500 h-fit p-9  flex flex-row justify-evenly items-center">
+        <div className=" flex-row hidden md:flex ">
+          <img className="w-96" src={mock} alt="" />
+          <img className="w-96" src={practice} alt="" />
+        </div>
+        <div className="flex flex-col">
+          <p className="text-3xl ml-2">Are you a Teacher?</p>
+          <Link to="/teacherchoice">
+            <button className="body-btn ml-12 md:ml-0 mt-3">Teacher</button>
+          </Link>
+          <p className="text-3xl mt-4 ml-2">Are you a Student?</p>
+          <Link to="/studentchoice">
+            <button className="body-btn ml-12 md:ml-0 mt-3 ">Student</button>
+          </Link>
+        </div>
       </div>
-      <div className="container my-5">
-        <div className="row justify-content-center">
+      <div className="container  ">
+        <div className="flex flex-col md:flex-row justify-center items-center">
           <div className="col-md-3">
             <Card description="Practice" img={practice} />
           </div>
@@ -111,102 +147,20 @@ export default function home() {
           </div>
         </div>
       </div>
-      <div>
-        <img id="body2" src={body2} alt="" />
-        <Link to='/loginstu' >
-        <button
-          style={{
-            position: "absolute",
-            top: "123.76302083333333vw",
-            left: "57.747395833333336vw",
-          }}
-          className="body2-btn"
-        >
-          Get Started
-        </button>
-        </Link>
-      </div>
-      <div>
-        <img id="body3" src={body3} alt="" />
-        <Link to={'/logintea'} >
-        <button
-          style={{
-            position: "absolute",
-            top: "183.26822916666666vw",
-            left: "2.6692708333333335vw",
-          }}
-          className="body3-btn"
-        >
-          Get Started
-        </button>
-        </Link>
-      </div>
-      <div>
-        <img id="body4" src={body4} alt="" />
-        <Link to='/loginstu' >
-        <button
-          style={{
-            position: "absolute",
-            top: "225.06510416666666vw",
-            left: "59.1796875vw",
-          }}
-          className="body4-btn"
-        >
-          Get Started
-        </button>
-        </Link>
-      </div>
-      <div>
-        <img id="body5" src={body5} alt="" />
-        <Link to='/logintea' >
-        <button
-          style={{
-            position: "absolute",
-            top: "272.3307291666667vw",
-            left: "4.166666666666667vw",
-          }}
-          className="body5-btn"
-        >
-          Get Started
-        </button>
-        </Link>
-      </div>
+
+      <div className="container flex flex-wrap max-w-screen-lg justify-evenly md:ml-72 ">
+            <div className="w-full md:w-5/12 p-5">
+              <img className="mr-5 mt-5 w-96 " src={learning} alt="..." />
+              <h2 className="col-p text-[#2e2a73] text-4xl" >What is Evalutron?</h2>
+              <p className="col-p w-64 md:w-96" > "Evalutron," A fully AI-based exam evaluation system using the MERN stack. Implemented automatic evaluation of both multiple-choice and subjective answers, significantly reducing the burden on teachers. </p>
+            </div>
+            <div className="w-full md:w-5/12 p-5  ">
+              <img className="mr-5 mt-5 w-72 " src={result} alt="..." />
+              <h2 className="col-p text-[#2e2a73] text-4xl" >Why should I use it? </h2>
+              <p className="col-p w-64 md:w-96" >Incorporated innovative features for future enhancements, showcasing a commitment to ongoing improvement in exam assessment technology. </p>
+            </div>
+      </div>  
       <Footer />
-      <div style={{ backgroundColor: "#2e2a73", marginTop: "1px" }}>
-        <p
-          style={{
-            color: "black",
-            fontSize: "30px",
-            padding: "40px",
-            display: "inline-block",
-          }}
-        >
-          Evalutron 2023-2055 All rights reserved
-        </p>
-        <div className="inline-flex float-right w-52" >
-          <img
-            className="social cursor-pointer "
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAmdJREFUSEuVVoFx4zAMgyZpMknzkzSepO0kbSfp/yTvTdSDRNukSCqu7nKxLYkkQJBSgRoFQG3vx5N/2zbYNdrO8Zzb4Ywdem327KItKKgStEy6uHwQYbBtWQZqanSOsjPaOd2Zje0FaAJQcaBiMTBsHB9B2A3a6DQT07TbnT7HsUpGvY2rXgtwr8AFwF8AX/K/Cpg7avve30lygOAbwFKAdctHFgu6ow8AtwAsHfF3l/1XrXbjWAz9lw0LClYrVRcCg7ztX+NEryh4Ry0rUBmIEtdhj9ERAQcXLUBZXan0eaJlkMPQYmyR0DEbxNWwOwTJ6IlCjzfJ2Z4fmXwFwDnN4NaB9FfuWwTIjjcSF1EQjWWwM/AuAqEx71jRqOr1rTaqLRrjWKigQVJunHe6jIToXNbYWh+WkhUG7MjRpUKHL2LQOg5yGfHqzVfS/DnSN1Id5bjvcXWXdSUX4R+bXzEX1J/LsTMV5DJZw3RcfdBbr7ZKuqDiuwCX9JCY0m6gUJBE7DKcHRJbR+J/z3VAzQn2Q5o3cxFLFBnVfaHHo4FY79Mzoffl3iaToCPHRMlGMij7gSub+4Y22zE7nRLnmdTMd6ndXPnKcbqIJcbavj9MdPetBJUJg+lTIz5c2qGxHW0J3D3oT9TWl/Oh8O2LCnCTw/yplVPmMAayVN2hRFVNmCfEtdHK/wctc4+X7XCOMsCfiYuOn2U9bxdEz9Li2bzWfkH4Z3rwmLLEmb1lnhJq1H2Gu7QTzDzVp4RgjtNpOZ+v9ZCU5LrzS27yPqsue67zPnSSlF/UIZ0tL64z/rPTwbbM0NmWsh9vseElA9f2kgAAAABJRU5ErkJggg=="
-            alt="."
-          />
-          <img
-            className="social cursor-pointer "
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAv5JREFUSEulV1uW2jAMvVpJMysZWEg70I3ArCTQjUD729/+k65EPVeWE9mxw7T1OZCZ2Nbj6uqBoLMEgNpXPOAvfFOgvh0PCpb3QLmTxQlkJbthyHImKu6Z3BdQG9GX0DZ3Pr+5vYlWQuKpYpcxAODn2bpvhs83O4rnOJ0A7PyzyNtGYnIKXKB4713qebwTYNTFw8kF5OeW1zQ0LxqxV2AqadaH+uGwEjZa3YUvawgEHIy7ghEqO0Bp7EtpKRGtqWIXcHBl+2cBbex/RnLoB4DRw3QBcOyy2jeyt7RyA9pmIlLpNzfm6Pdv/gxeFx7PthtOVj7KeuEIYlDgDXAYBRNUrg7pFwBXl/QVAJXSEYO78Lhyf1DBA4q7k6JG8iTAOVW0opiQRBdNfGCYuPkLwE9TLBigYNhmrhQxFuhOzUq5A7ov6h3A1Dq7JXz+9r9fATl4MTwD8m4lczGOXpPpPcUmhgd4kJZFYrFwEDKuWUBwPN0z2MHYxiwoFQegIq/d46jYislJzVu5CPTYaR4jBAeooeKFw+7e9D88ZlowdvSGqbFaAjSNBvRfoY5Wyx5Qh7Fsf24YDbScDfyYFQtwnzlZsbphtTnnxJILoPS6tTIqAWo75ord6FaMI7mqdIrkojdsAHGxtjOWC/l6rF4rtjdNVvvZAyCjpw3h/G5qBJ9IKD9TpZMl9CM1mxim3CQWvLNnRTqFfvwWcrmG2yEuCgvPzCVYgCnWnbljCawcWokT4CVBVwqyM4IdFK9LB5OrQKeMfuhUTCf190ULXv2TKhcYM/ZRY3AUtEx/zSZRo8AUJOmqWt1qi0tprKtXYUKH2XYmTJk5lVKKhVKVPC5zaoDKDVDGuz0IrMK4MoN3cy/2QWAVsmYd4hRBa/NwN48+68aU7gfbi9HHPV1NMGmu9q84iLtSsjgNe+0zAbxi9qehhDcMe6WDBbn6cTPPPzLaUkRnPlv/wmjq+xBne/4GiTE02+TacLvmYRRU/chqSHGPO7V6HYg8gfUM+gto4tE/8NhFNdynIeIAAAAASUVORK5CYII="
-            alt="."
-          />
-          <img
-            className="social cursor-pointer "
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAnVJREFUSEutV4FxwzAIfDZJNnE2cSZpMomzSbJJvYl6ICyBhGonre7a5FzE8/CAS+BDAJJ889/tI2szNtW/7H+wu/fdBEGMgh6F0AMfYb+TiRjMR2uAi/kJAP8cOx17feCfv1pnDlhsCYl/yUdXhFGOgxh95lYknK0VNa4mAM+isVHaD+M7wwsAZc7E/CnA5vFaU/+GqnrTDKxpbcU1gfAsOQYeAK4KvAA0Sd/tCNCltHbqhYBXKV/1IXWdkk81l3o7XwBuXTWVQR0Ew3obxjl2eyzjFYQrktaFsCBhPlzeHt8zto1PQGGs97i+nG4O8eZl7tsmzv6n4uq8+TY71ujFakfVKi7FZGNmzYdrPGsG7vrsBMIXEu4qnG3wLACmZvAb4KjGKi51zE2/AbMzrvEtEe6adm4/6c2m9hyAgm+M6QKkMsH2+rgDVmULYyNoBmIxyuhThc8ALWbtZWAjDTsYdYCUy2eAVr0sjDtgYUYzIa0p9/xLbzfDaMhYzL0x4Yw0BtaIa6fnPq/1B76NAEc1tsCWcVDjznmxl0mnGT8hKXB+YGq8N6uFsQe2qdZRalk9ALpqabju+W85rr+ommYglXQScErqXDlXxnmn98C9uCS2di3+D+NM+8NUy6xWxrWPCyut6wNJlM2nMrbAG2O7nUTVfi3+Orkk1d6eB4QBpmddo007NeN4ahzVmeR3gt0t3cgerOvRrA76+I0t0K3LPlD/BhLMWNseDXSwnTrEINpsY8YvoX3Z20SRt0ywFu2rTx3NHj1g//JvTG6AHAndsjliP97ffHv88hb4riztbgn+5dqJKwMHGo3vBSm1IgqUP9LnD8lAMDiMUOQEAAAAAElFTkSuQmCC"
-            alt="."
-          />
-          <img
-            className="social cursor-pointer "
-            style={{ marginRight: "50px" }}
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAq9JREFUSEulVott6zAMPE5SZ5KXTPLiSZpMEr9Jkk2aTsIHSpRFSpRcoAIKpNbneNTxRMIvBgHgYH/3PVgon4BgJYH9oSOUaeC6ye41nxSYYMHSfBzQwsAZwAeAb8V9A3jl3/6cmFiGDBk3SVwA/AVwqwQVoEb4BuEFpn8EfvVX4Flk4PEIAEugQf7yOYX9HaD3SAUz4AWEJ5iWeLNPVCABCeCigXTUBsAJ7KtPxIGOuyQkxmu+/2Gq3cQTWUBHQ1htuugbhA8wzgScszCTDt6szNu4/OGEBxjXGNFt3ZRNo066AvxoFC7BCfN9tKkWls+wJHSLEnmB0/3Zr+UfCfpRMquhSmY05SUkT00ijdn6wl4BEsYWWCpgAegPwLcGWNZJne/BtoxFULI5m+HYrU6NWp0mBtuEtexLg+oiOgMsB/xkpIANQNFSZHf2vEs2meJceSrfzXTsdtgBt8IZPB4raxWYVHs1Nvc3KcMEGeF0XkzAjYF7k2p8ei921N399BJwZfYAOBBoytbKhC3Vt9mipRTmegce623fpwI1KqhaPXHycgmizks5qE129ibucwrVXh2qPKODtO9I5kfFGVmlME53o7u2pksQtyqzWaBBagggW/k2t+I413HrsZ8mZ9jGwbAMGoGMYGyzpLpCm3Qf1JWbJu5apb6+TgTIlWmX0p6fGR/Us2qj5p6nTke4gXEfvk46IawFOHgWbapdxENBKcvdKqtMjGKMQAT8CcISWna+RjNEM8Xbnc93r9IRsMwL+CeQHK2/EO8i5eqsV0vXcZm1TTMV1WbPPouWcf6eGdexgbCOjLRU21S+ukh6aWlv5d7lL3okShtU692Vc2dKFdc8kWPfz1cgIHYsSURTP50AH1L3tWuahTGib1xqCtoOJNZ4GNEPngsr4Uaf/wEOcw8zuZxPeQAAAABJRU5ErkJggg=="
-            alt="."
-          />
-        </div>
-      </div>
     </>
   );
 }

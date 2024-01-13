@@ -16,7 +16,7 @@ const uri = `mongodb+srv://trickerbaby:${encodedPassword}@cluster0.rq5ucba.mongo
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const configuration = new Configuration({
-  apiKey: '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'
+  apiKey: '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'
 });
 
 
@@ -64,12 +64,42 @@ app.post('/insertquestion', async (req, res) => {
   }
 });
 
+app.get('/getresultsstudent', async (req, res) => {
+  console.log("DONE in Students");
+  const rollNumber = req.query.rollNumber;
+  const subjectCode = req.query.subjectCode;
+  console.log(rollNumber+" "+subjectCode);
+ 
+
+  try {
+    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+    await client.connect();
+
+    const db = client.db("myDatabase");
+    const resultsCollection = db.collection('results'); // Use the "results" collection
+
+    const studentResults = await resultsCollection.findOne({ rollNumber ,subjectCode});
+
+    client.close();
+
+    if (studentResults) {
+      res.json(studentResults); // Send the student's results as a JSON response
+    } else {
+      res.status(404).json({ message: 'Student not found' });
+    }
+  } catch (error) {
+    console.error('Error fetching results:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
 app.get('/getresultsteacher', async (req, res) => {
   console.log("DONE");
   const rollNumber = req.query.rollNumber;
   const subjectCode = req.query.subjectCode;
  
+  console.log(rollNumber,subjectCode);
 
  
 
@@ -111,7 +141,7 @@ app.get('/getSubject', async (req, res) => {
       const queCollection = db.collection("questions");
   
       // Find the subject with the specified subjectCode
-      const subject = await queCollection.findOne({ subjectCode,date });
+      const subject = await queCollection.findOne({ subjectCode});
       console.log(subject);
   
       if (subject) {
@@ -195,9 +225,11 @@ app.get('/getSubject', async (req, res) => {
   
  // Sample endpoint to handle answer submission
  app.post("/submit-answer", async (req, res) => {
+  console.log(req.body);
   try {
     // Extract the submitted data from the request body
-    const { rollNumber, name, semester, subjectCode, date, questions } = req.body;
+    const { rollNumber, name, semester, subjectCode, date, questions,comment} = req.body;
+    console.log("this is getting applied in promp ",comment);
 
     // Validate the data (you should implement your own validation logic)
     if (!rollNumber || !name || !semester || !subjectCode || !date || !Array.isArray(questions)) {
@@ -216,13 +248,14 @@ app.get('/getSubject', async (req, res) => {
     console.log("Subject Code:", subjectCode);
     console.log("Date:", date);
     console.log("Questions and Answers:", questions);
+    console.log("comment is",comment)
 
     const completion = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
       messages: [
         {
           role: 'user',
-          content: `You are a university professor give marks out of ${questions[i]['marks']} on this answer "${questions[i]['userAnswer']}" For this question "${questions[i]['question']}" Please only give output in this format "<total_marks>(only a single integer)#<Feedback>" please maintain this format its just for fun and entertainment `
+          content: `You are a university professor give marks out of ${questions[i]['marks']} on this answer "${questions[i]['userAnswer']}" For this question "${questions[i]['question']}" Please only give output in this format "<total_marks>(only a single integer)#<Feedback>" please maintain this format its just for fun and entertainment ${comment}`
         },
       ],
     });

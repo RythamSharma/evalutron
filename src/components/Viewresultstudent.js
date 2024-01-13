@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-import logo from '../components/logo.png'
+import logo from '../components/pictures/logo.png'
+
 import logo2 from '../components/pictures/logo2.png';
 import resultlogo from '../components/pictures/resultlogo.png';
 
@@ -8,7 +9,7 @@ import './ViewResult.css';
 import { useNavigate } from "react-router-dom";
 
 const ResultPage = (props) => {
-  const{setcode, setresrol,code,resrol,rollNumber}=props;
+  const{setcode, setresrol,code,rollNumber}=props;
   const [date, setDate] = useState("");
   const navigate = useNavigate();
 
