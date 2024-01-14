@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "./pictures/logo.png";
 import Card from "./Card";
+import preview from "./pictures/preview1.png"
 import practice from "./pictures/practicer.png";
 import learning from "./pictures/learning.png"
 import mock from "./pictures/mock.png";
@@ -134,13 +135,13 @@ export default function Home() {
       <div className="container  ">
         <div className="flex flex-col md:flex-row justify-center items-center">
           <div className="col-md-3">
-            <Card description="Practice" img={practice} />
+            <Card description="Practice" img={preview} />
           </div>
           <div className="col-md-3">
             <Card description="Mock Test" img={mock} />
           </div>
           <div className="col-md-3">
-            <Card description="E-Learning" img={learning} mar="63px" />
+            <Card description="E-Learning" img={practice} mar="63px" />
           </div>
           <div className="col-md-3">
             <Card description="Result" img={result} />

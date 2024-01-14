@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-br from-violet-900 to-slate-50" style={{ backgroundColor: "#2e2a73" }}>
+    <footer className=" bg-gradient-to-r from-violet-300 to-pink-300" style={{ backgroundColor: "#2e2a73" }}>
       <div className="  bg-gray-100 rounded-md bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-20  container">
         <div className="row">
           <div className="col" style={{ padding: "80px" }}>
@@ -35,7 +35,7 @@ export default function Footer() {
             <ul className="foot1">
               <li>
                 <a className="foot2" href="/">
-                  How deos it work?
+                  How does it work?
                 </a>
               </li>
               <li>

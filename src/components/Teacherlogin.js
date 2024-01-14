@@ -45,22 +45,22 @@ export default function Teacherlogin() {
     }
   }
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-tl overflow-hidden  to-amber-100 via-rose-300 from-fuchsia-500">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-tl overflow-hidden  to-amber-100 via-rose-100 from-fuchsia-500">
       <form
         onSubmit={handleSubmit}
         className="flex flex-col items-center bg-gray-900 rounded-3xl bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-20 p-20 w-full  md:w-[50vw]"
       >
         <h1
-          className="  mb-[-20px]  md:mb-16 font-extrabold text-black heading "
+          className="  mb-[-15px]  md:mb-3 font-extrabold text-black heading "
           style={{ fontSize: "60px" }}
         >
           EVALUTRON
         </h1>
         <h1
-          className=" mb-[-6px] mt-11 md:hidden font-extralight text-black  "
+          className="  mb-[-1px]  md:mb-[25px] font-extralight text-black  "
           style={{ fontSize: "20px" }}
         >
-          Enter Credentials
+          TEACHER
         </h1>
         <div className="flex flex-row  ">
           <div>
@@ -68,7 +68,13 @@ export default function Teacherlogin() {
           </div>
           <div className="flex flex-col mt-11">
             <input
-              style={{ width: "350px", borderRadius: "15px" }}
+              style={{
+                width: "350px",
+                border: "none",
+                marginBottom: "7px",
+                borderBottom: "1px solid black",
+                backgroundColor: "transparent",
+              }}
               className="form-control me-2"
               type="search"
               placeholder="Enter Your ID"
@@ -81,8 +87,9 @@ export default function Teacherlogin() {
             <input
               style={{
                 width: "350px",
-                borderRadius: "15px",
-                marginTop: "10px",
+                border: "none",
+                borderBottom: "1px solid black",
+                backgroundColor: "transparent",
               }}
               className="form-control me-2"
               type="password"

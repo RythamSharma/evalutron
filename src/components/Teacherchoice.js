@@ -3,7 +3,7 @@ import bg01 from "./pictures/bg01.png";
 import { Link } from "react-router-dom";
 export default function Studentchoice() {
   return (
-    <div className=" md:mt-[-23px] bg-gradient-to-br from-amber-100 via-rose-300 to-fuchsia-500 h-[100vh] md:h-[90vh] w-[100vw] ">
+    <div className=" md:mt-[-23px] bg-gradient-to-br from-fuchsia-500 via-rose-100 to-amber-100 h-[100vh] md:h-[90vh] w-[100vw] ">
       <h1
         className="heading hidden md:block "
         style={{

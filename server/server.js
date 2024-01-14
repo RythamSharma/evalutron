@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -12,11 +13,14 @@ const password = "Navya#1427";
 const encodedPassword = encodeURIComponent("Navya#1427");
 const uri = `mongodb+srv://trickerbaby:${encodedPassword}@cluster0.rq5ucba.mongodb.net/?retryWrites=true&w=majority`;
 
+// console.log("API Key:", process.env.OPENAI_API_KEY);
+// console.log("Evironement variables:", process.env);
+
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const configuration = new Configuration({
-  apiKey: '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'
+  apiKey: process.env.OPENAI_API_KEY
 });
 
 

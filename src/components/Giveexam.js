@@ -53,6 +53,8 @@ function Giveexam(props) {
 
     return () => clearInterval(timer);
   }, [timeLeft]);
+
+  
   const handleInputChange = (event) => {
     setSubjectCode(event.target.value);
   };
